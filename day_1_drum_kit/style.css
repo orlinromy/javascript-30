@@ -1,0 +1,47 @@
+:root {
+    --font-family: "Kumbh Sans", sans-serif;
+    --sound-font-family: "Nunito", monospace;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #312F2F;
+}
+
+.keys {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-height: 100vh;
+}
+
+.key {
+    text-align: center;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    border: solid 1px black;
+    width: 10rem;
+    transition: all 0.07s ease;
+    background-color: #EF626C;
+}
+
+.playing {
+    transform: scale(1.1);
+    border-color: #84DCCF;
+    box-shadow: 0 0 1rem #84DCCF;
+}
+
+kbd {
+    font-family: var(--font-family);
+    font-size: 1.5rem;
+    display: block;
+}
+
+.sound{
+    text-transform: uppercase;
+    font-family: var(--sound-font-family);
+    font-size: 0.7rem;
+}

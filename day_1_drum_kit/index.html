@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JavaScript Drum Kit #JavaScript30</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kumbh+Sans:400|Nunito:600">
+    </head>
+    <body>
+        <div class="keys">
+            <div class="key" data-key="65" onclick="onClickPlaySound(65)">
+                <kbd>A</kbd>
+                <span class="sound">clap</span>
+            </div> 
+            <div class="key" data-key="83" onclick="onClickPlaySound(83)">
+                <kbd>S</kbd>
+                <span class="sound">hihat</span>
+            </div> 
+            <div class="key" data-key="68" onclick="onClickPlaySound(68)">
+                <kbd>D</kbd>
+                <span class="sound">kick</span>
+            </div> 
+            <div class="key" data-key="70" onclick="onClickPlaySound(70)">
+                <kbd>F</kbd>
+                <span class="sound">openhat</span>
+            </div> 
+            <div class="key" data-key="71" onclick="onClickPlaySound(71)">
+                <kbd>G</kbd>
+                <span class="sound">boom</span>
+            </div> 
+            <div class="key" data-key="72" onclick="onClickPlaySound(72)">
+                <kbd>H</kbd>
+                <span class="sound">ride</span>
+            </div> 
+            <div class="key" data-key="74" onclick="onClickPlaySound(74)">
+                <kbd>J</kbd>
+                <span class="sound">snare</span>
+            </div> 
+            <div class="key" data-key="75" onclick="onClickPlaySound(75)">
+                <kbd>K</kbd>
+                <span class="sound">tom</span>
+            </div> 
+            <div class="key" data-key="76" onclick="onClickPlaySound(76)">
+                <kbd>L</kbd>
+                <span class="sound">tink</span>
+            </div> 
+        </div>
+        
+        <audio data-key="65" src="sounds/clap.wav"></audio>
+        <audio data-key="83" src="sounds/hihat.wav"></audio>
+        <audio data-key="68" src="sounds/kick.wav"></audio>
+        <audio data-key="70" src="sounds/openhat.wav"></audio>
+        <audio data-key="71" src="sounds/boom.wav"></audio>
+        <audio data-key="72" src="sounds/ride.wav"></audio>
+        <audio data-key="74" src="sounds/snare.wav"></audio>
+        <audio data-key="75" src="sounds/tom.wav"></audio>
+        <audio data-key="76" src="sounds/tink.wav"></audio>
+    </body>
+
+    <script>
+        function removeTransition(e) {
+            if (e.propertyName !== "transform") return; 
+            this.classList.remove("playing");
+        }
+
+        function playSound(e) {
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+            if (!audio) return;
+            audio.currentTime = 0;
+            audio.play();
+            key.classList.add("playing");
+        }
+
+        function onClickPlaySound(keyCode) {
+            const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
+            const key = document.querySelector(`div[data-key="${keyCode}"]`);
+            if (!audio) return;
+            audio.currentTime = 0;
+            audio.play();
+            key.classList.add("playing");
+        }
+
+        const keys = document.querySelectorAll(".key");
+        // execute on key down event
+        window.addEventListener("keydown", playSound);
+        
+        // execute for click events
+        
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+    </script>
+
+</html>
