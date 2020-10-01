@@ -3,3 +3,7 @@ This is a repository to store all JavaScript practice codes from [JavaScript30](
 
 ## Resources
 All resources are taken from [JavaScript30 Starter Files](https://github.com/wesbos/JavaScript30). 
+
+
+## Notes 
+The notes in this exercises also contain the solution to the challenges. Proceed with caution.
