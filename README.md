@@ -6,4 +6,4 @@ All resources are taken from [JavaScript30 Starter Files](https://github.com/wes
 
 
 ## Notes 
-The notes in this exercises also contain the solution to the challenges. Proceed with caution.
+The notes in each folder's readme file also contain the solution to the challenges. Proceed with caution.
