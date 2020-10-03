@@ -8,4 +8,4 @@ All resources are taken from [JavaScript30 Starter Files](https://github.com/wes
 ## Notes 
 The notes in each folder's readme file also contain the solution to the challenges. Proceed with caution.
 
-Also, feel free to contact me if you have any stretch goals!
+Also, let me know if you have stretch goals you want to challenge me :)
