@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+<canvas id="draw" width="800" height="800"></canvas>
+<script>
+  const canvas = document.querySelector('#draw');
+  const ctx = canvas.getContext('2d'); // you will draw on something called a context
+
+  // get the window width and height
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+
+  // ctx.strokeStyle = '#BADA55';
+  ctx.lineCap = 'round'; // set/return the style of the end caps of a line
+  ctx.lineJoin = 'round'; // type of corner created when the 2 lines meet
+  ctx.lineWidth = 50;
+  // ctx.globalCompositeOperation = 'multiply' // to blend the colors
+
+
+  let isDraw = false;
+  let lastX = 0;
+  let lastY = 0;
+  let hue = 0;
+  let direction = true
+
+  function draw(e) {
+    if (isDraw) {
+      console.log(e);
+      ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+      ctx.beginPath(); // begin or reset the current path
+      ctx.moveTo(lastX,lastY); // moves the path to the specified point in the canvas, without creating a line
+      ctx.lineTo(e.offsetX, e.offsetY); // add a new point and creates a line to that point from the last specified point in the canvas
+      ctx.stroke(); // use this method to actually draw the path
+      [lastX, lastY] = [e.offsetX, e.offsetY]
+      
+      hue++;
+      if (hue >= 360) {
+        hue = 0;
+      }
+      
+      if (ctx.lineWidth >= 50 || ctx.lineWidth < 10) {
+        direction = !direction;
+      }
+
+      if (direction) {
+        ctx.lineWidth++
+      }      
+      else {
+        ctx.lineWidth--;
+      }
+    }
+  }
+
+  canvas.addEventListener('mousedown', (e) => {
+    isDraw = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY] // sets the last x and y position to the current position when the mouse is clicked
+  })
+
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', () => {isDraw = false})
+  canvas.addEventListener('mouseout', () => {isDraw = false})
+
+
+</script>
+
+<style>
+  html, body {
+    margin: 0;
+  }
+</style>
+
+</body>
+</html>
