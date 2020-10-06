@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // right click on the script in the inspect page > Break on... > attribute modification
+    // this will tell the dev tool to put a debug point on a certain line, useful for debugging
+
+
+    // Regular
+    console.log('I am a string'); // print text to console per usual
+
+    // Interpolated
+    console.log('I am a %s string' ,'cool') // replaces %s with the string on the second argument
+
+    // Styled
+    console.log('%c I am a great string','font-size: 30px; color: blue;'); // replaces %c with CSS styling
+
+    // warning!
+    console.warn('oops!')
+
+    // Error :|
+    console.error('nope!')
+
+    // Info
+    console.info('use this to give information')
+
+    // Testing
+    console.assert(1===1, 'The value is false') // to return the second argument error if the first argument evaluated to be false. Otherwise, return nothing
+
+    // clearing
+    console.clear() // clear the console screen
+
+    // Viewing DOM Elements
+    const p = document.querySelector('p');
+    console.log(p); // return the element in the DOM
+    console.dir(p); // return a dropdown list with the properties/methods of the element
+
+    // Grouping together
+    dogs.forEach(dog => {
+      // console.group(`${dog.name}`)        // group has to start with .group() with the group level passed to the group function
+      console.groupCollapsed(`${dog.name}`)  // use this to collapse the result
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.groupEnd(`${dog.name}`)     // group has to end with .groupEnd() with the same group level as the group it's initiated
+    })
+
+    // counting
+    // counts the number of occurrence of the item passed into the count() function
+    console.count('Wes')
+    console.count('Wes')
+    console.count('Steve')
+    console.count('Wes')
+    console.count('Steve')
+    console.count('Wes')
+    console.count('Wes')
+    console.count('Steve')
+    console.count('Steve')
+    console.count('Steve')
+    console.count('Wes')
+    console.count('Steve')
+    console.count('Wes')
+    console.count('Steve')
+
+    // timing
+    console.time('fetching data');    // start with .time()
+    fetch('https://api.github.com/users/wesbos')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data')  // end with .timeEnd()
+        console.log(data);          
+      })
+
+    // table
+    console.table(dogs);
+  </script>
+</body>
+</html>
