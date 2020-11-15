@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Speech Detection</title>
+</head>
+<body>
+
+  <div class="words" contenteditable>
+  </div>
+
+<script>
+  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  const recognition = new SpeechRecognition()
+  recognition.interimResults = true; // populate and show the result as the speaker is speaking. Otherwise, you need to stop speaking to get the result
+  
+  let p = document.createElement('p')
+  const words = document.querySelector('.words')
+  words.appendChild(p);
+
+  recognition.addEventListener('result', e => {
+    const transcript = Array.from(e.results)
+                                  .map(result => result[0]) // take the first result from the array of results
+                                  .map(result => result.transcript) // map once more 
+                                  .join("");  // join all the result in 1 big string
+    
+    p.textContent = transcript; // feed the paragraph element with the transcript from speech recognition
+
+    // so as not to overwrite the paragraph...
+    if (e.results[0].isFinal) {
+      p = document.createElement('p') // create a new paragraph element
+      words.appendChild(p);   // append the result so that what you say next will appear in the next paragraph instead of being overwritten
+    }
+
+  })
+
+  recognition.addEventListener('end', recognition.start) // to restart the speech recognition when we have stopped speaking so that when we start speaking again, the speech recognition will start. By default, if the user stop talking, the speech recognition will stop 
+  recognition.start()
+
+</script>
+
+
+  <style>
+    html {
+      font-size: 10px;
+    }
+
+    body {
+      background: #ffc600;
+      font-family: 'helvetica neue';
+      font-weight: 200;
+      font-size: 20px;
+    }
+
+    .words {
+      max-width: 500px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+      padding: 1rem 2rem 1rem 5rem;
+      background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
+      background-size: 100% 3rem;
+      position: relative;
+      line-height: 3rem;
+    }
+    
+    p {
+      margin: 0 0 3rem;
+    }
+
+    .words:before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      top: 0;
+      left: 30px;
+      bottom: 0;
+      border: 1px solid;
+      border-color: transparent #efe4e4;
+    }
+  </style>
+
+</body>
+</html>
