@@ -1,0 +1,7 @@
+# Day 24 - Sticky Nav
+### Objective
+Fix the position of the navigation when scrolling down the document
+
+### Notes
+- When you set an element position as `fixed`, the element no longer takes the space, which causes reflow in the document - the next element will take up the space given up by the element with `position: fixed`. To avoid reflow, offset the space taken by the fixed element.
+- Cool trick: you can configure the CSS style of some classes by adding the added class + the class that you want to change when the class exists in the stylesheet
