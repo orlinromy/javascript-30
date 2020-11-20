@@ -1,0 +1,9 @@
+# Day 25 - Event Capture, Propagation, Bubbling and Once
+### Objective
+Learn the concept of event capture, event propagation, event bubbling, and `once` option
+
+### Notes
+- Event Bubbling: the event is not only applicable to the current element, but also ripples all the way up. The way this is done in the browser is the browser `capture` the event on the elements top down (from parent to child) and stores it. When it reaches the smallest element, it fires up the event and ripples up.
+- `capture` option in event listener: Fires up the event as the browser captures the element
+- `once`: the event will only be fired up once
+- `Event.stopPropagation()`: stops the event bubbling
